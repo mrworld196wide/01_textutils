@@ -1,6 +1,7 @@
 import React from 'react'
+import PropTypes from 'prop-types' //using snippet impt
 
-export default function Navbar(props)
+export default function Navbar(props)   //using snippet rfc
  {
   return (
     <nav className="navbar navbar-expand-lg navbar-light bg-light">
@@ -15,7 +16,7 @@ export default function Navbar(props)
               <a className="nav-link active" aria-current="page" href="/">Home</a>
             </li>
             <li className="nav-item">
-              <a className="nav-link" href="/">About</a>
+              <a className="nav-link" href="/"> {props.aboutText} </a>
             </li> 
           </ul>
           <form className="d-flex">
@@ -27,3 +28,17 @@ export default function Navbar(props)
     </nav>
   )
 }
+ 
+// proptypes
+Navbar.propTypes= { //it sets properties of props so here it is restricting args to be string type only
+    title: PropTypes.string.isRequired,
+    aboutText: PropTypes.string //used snippet pts to get PropTypes.string
+}
+
+/*
+To set default propTypes use 
+Navbar.defaultProps = {
+    title: "Navbar 101",
+    aboutText: "About Navbar"
+}
+*/
