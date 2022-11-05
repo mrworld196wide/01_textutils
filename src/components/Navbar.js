@@ -2,9 +2,9 @@ import React from 'react'
 import PropTypes from 'prop-types' //using snippet impt
 
 export default function Navbar(props)   //using snippet rfc
- {
+{
   return (
-    <nav className="navbar navbar-expand-lg navbar-dark bg-dark">
+    <nav className={`navbar navbar-expand-lg navbar-${props.mode} bg-${props.mode}`}>  {/* template literals here */}
       <div className="container-fluid">
         <a className="navbar-brand" href="/"> {props.title} </a>
         <button className="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
@@ -17,18 +17,23 @@ export default function Navbar(props)   //using snippet rfc
             </li>
             <li className="nav-item">
               <a className="nav-link" href="/"> {props.aboutText} </a>
-            </li> 
+            </li>
           </ul>
+          {/* ternary operator is used here along with template literals*/}
+          <div className={`form-check form-switch text-${props.mode === 'light' ? 'dark' : 'light'} `}>   
+            <label className="form-check-label" htmlFor="flexSwitchCheckDefault">{props.mode}</label>
+            <input className="form-check-input" onClick={props.toggleMode} type="checkbox" role="switch" id="flexSwitchCheckDefault" />
+          </div>
         </div>
       </div>
     </nav>
   )
 }
- 
+
 // proptypes
-Navbar.propTypes= { //it sets properties of props so here it is restricting args to be string type only
-    title: PropTypes.string.isRequired,
-    aboutText: PropTypes.string //used snippet pts to get PropTypes.string
+Navbar.propTypes = { //it sets properties of props so here it is restricting args to be string type only
+  title: PropTypes.string.isRequired,
+  aboutText: PropTypes.string //used snippet pts to get PropTypes.string
 }
 
 /*
