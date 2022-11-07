@@ -3,26 +3,42 @@ import './App.css';
 
 import Navbar from './components/Navbar';
 import Textform from './components/Textform';
-import React, {useState} from 'react';
+import React, { useState } from 'react';
+import Alert from './components/Alert';
 function App() {
-  const [mode, setMode] = useState('light') //whether dark mode is enabled or not
-  const toggleMode= () =>{
-    if (mode === 'light'){
+  const [mode, setMode] = useState('light'); //whether dark mode is enabled or not
+  const [alert, setAlert] = useState(null);
+
+  const showAlert = (message, type) => {
+    setAlert({
+      msg: message,
+      type: type
+    })
+    setTimeout(() => {
+      setAlert(null);
+    }, 3500);
+  }
+
+  const toggleMode = () => {
+    if (mode === 'light') {
       setMode('dark');
       document.body.style.backgroundColor = '#042743';
+      showAlert("dark mode has been enabled", "success");
     }
-    else{
+    else {
       setMode('light');
       document.body.style.backgroundColor = 'white';
+      showAlert("light mode has been enabled", "success");
     }
-    
+
   }
   return (
     <>
-      <Navbar title="Aishwar" aboutText="About Aishwar" mode={mode} toggleMode={toggleMode}/>
+      <Navbar title="Aishwar" aboutText="About Aishwar" mode={mode} toggleMode={toggleMode} />
+      <Alert alert={alert} />
       <div className="container my-3">
-      <Textform heading="enter the required text below" mode={mode}/>
-      {/* <About/> */}
+        <Textform showAlert={showAlert} heading="enter the required text below" mode={mode} />
+        {/* <About/> */}
       </div>
     </>
   );
